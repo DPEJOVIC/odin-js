@@ -5,6 +5,9 @@ function getComputerChoice() {
     return choices[selection];
 }
 
+let pScore = 0;
+let cScore = 0;
+
 function playRound(playerChoice, computerChoice) {
 
     playerChoice = playerChoice.toLowerCase();
@@ -21,6 +24,7 @@ function playRound(playerChoice, computerChoice) {
         (playerChoice == "paper" && computerChoice == "rock") ||
         (playerChoice == "scissors" && computerChoice == "paper")
     ) {
+        pScore += 1;
         return `You win! ${playerChoice} beats ${computerChoice}`
     };
     
@@ -29,6 +33,7 @@ function playRound(playerChoice, computerChoice) {
         (computerChoice == "paper" && playerChoice == "rock") ||
         (computerChoice == "scissors" && playerChoice == "paper")
     ) {
+        cScore += 1;
         return `You lose! ${computerChoice} beats ${playerChoice}`
     };
 
@@ -54,7 +59,33 @@ function playGame() {
     return `Player score: ${playerScore}, Computer score: ${compScore}`
 }
 
-console.log(playGame());
+const scores = document.querySelector("#score");
+const resultdiv = document.querySelector("#result");
+
+const scissorsbtn = document.querySelector("#scissorsbtn");
+scissorsbtn.addEventListener("click", () => {
+    let res = playRound("scissors", getComputerChoice());
+    resultdiv.textContent = `${res}`;
+    scores.textContent = `Your score: ${pScore}, Computer score: ${cScore}`;
+});
+
+const rockbtn = document.querySelector("#rockbtn");
+rockbtn.addEventListener("click", () => {
+    let res = playRound("rock", getComputerChoice());
+    resultdiv.textContent = `${res}`
+    scores.textContent = `Your score: ${pScore}, Computer score: ${cScore}`;
+});
+
+const paperbtn = document.querySelector("#paperbtn");
+paperbtn.addEventListener("click", () => {
+    let res = playRound("paper", getComputerChoice());
+    resultdiv.textContent = `${res}`
+    scores.textContent = `Your score: ${pScore}, Computer score: ${cScore}`;
+});
+
+
+
+// console.log(playGame());
 
 // const playerChoice = prompt("Make a choice: Rock, Paper, or Scissors.", "rock");
 // const computerChoice = getComputerChoice();
